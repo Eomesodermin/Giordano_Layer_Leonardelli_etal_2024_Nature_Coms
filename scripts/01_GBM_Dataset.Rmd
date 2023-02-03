@@ -1,0 +1,354 @@
+---
+title: "GBM_dataset_GSE182109"
+author: "Dillon Corvino"
+date: "31/01/2023"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: united
+    highlight: tango
+    df_print: paged
+    code_folding: hide
+editor_options: 
+  chunk_output_type: console
+  markdown: 
+    wrap: 72
+---
+
+Built with R version `{r} getRversion()`
+
+## Setup {.tabset}
+
+
+
+### Dataset information
+
+```{r Dataset_Info}
+
+# Single-cell analysis of human glioma and immune cells identifies S100A4 as an immunotherapy target (GSE182109)
+
+# data downloaded from single cell portal (broad institute)
+
+```
+
+### Environment
+
+```{r setup, message = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,  
+  eval = TRUE, 
+  tidy = TRUE
+)
+
+knitr::opts_knit$set(
+  root.dir = "../"
+)
+
+# Environment Set up
+rm(list = ls()) #Clean workspace
+cat("\014")     #Clean Console
+gc() # Free memory
+
+
+# Establish working directory
+library("rstudioapi")
+
+# Set working directory to source file location
+setwd(dirname(getActiveDocumentContext()$path))
+setwd("..")
+
+# Explicitly load key packages
+library("Seurat")
+library("SeuratDisk")
+library("dplyr")
+library("scCustomize")
+library("usefulfunctions")
+
+# pipeline variables
+quick.load <- FALSE
+long.compute <- FALSE
+
+# Colour scheme 
+usefulfunctions::Get.batlow()
+
+```
+
+## Reading in and formatting dataset {.tabset}
+
+### Reading data
+```{r reading_data}
+
+
+if(long.compute){
+#raw.data <- Seurat::Read10X(data.dir = "data/SCP1985/expression/Raw_data/")
+
+
+input.meta <- read.delim("data/SCP1985/metadata/Meta_GBM.txt", sep = ",")
+
+input.meta <- input.meta[-1, ]
+
+rownames(input.meta) <- input.meta$NAME
+
+
+# load processed data
+processed.data <- Seurat::Read10X(data.dir = "data/SCP1985/expression/Processed_data/")
+
+processed.seurat <- CreateAssayObject(data = processed.data)
+
+GBM.seurat <- CreateSeuratObject(counts = processed.seurat,
+                                 min.cells = 0,
+                                 min.features = 0,
+                                 is.expr = 0, 
+                                 normalization.method = NULL, 
+                                 do.scale = FALSE, 
+                                 do.center = FALSE, 
+                                 names.field = 1, 
+                                 names.delim = "_", 
+                                 meta.data = input.meta)
+
+
+
+GBM.seurat@meta.data[1:10, ]
+
+
+# remove large objects
+rm(input.meta, processed.data, processed.seurat)
+}
+```
+
+
+### Adding umap metadata
+```{r adding_umap_metadata}
+
+if(long.compute){
+
+# Set seed for reproducibility
+set.seed(42)
+
+DefaultAssay(GBM.seurat) <- "RNA"
+
+
+GBM.seurat@meta.data[1:10,]
+
+colnames(GBM.seurat@meta.data)
+
+
+input.umap <- read.delim("data/SCP1985/cluster/Cluster_GBM.txt", sep = ",")
+
+input.umap <- input.umap[-1,]
+
+rownames(input.umap)
+colnames(input.umap)
+input.umap <- input.umap[,2:3]
+input.umap$X <- as.numeric(input.umap$X)
+input.umap$Y <- as.numeric(input.umap$Y)
+colnames(input.umap)
+colnames(input.umap) <- c("UMAP_1", "UMAP_2")
+input.umap <- as.matrix(input.umap)
+
+
+
+DefaultAssay(GBM.seurat) <- "RNA"
+
+GBM.seurat[["umap"]] <- CreateDimReducObject(embeddings = input.umap,
+                                             key = "umap_",
+                                             assay = DefaultAssay(GBM.seurat))
+
+
+Idents(GBM.seurat) <- GBM.seurat@meta.data$Assignment
+
+
+
+SeuratDisk::SaveH5Seurat(GBM.seurat, 
+                         filename = "data/GBM_seurat_object.h5seurat", 
+                         overwrite = TRUE, 
+                         verbose = TRUE)
+}else{
+  
+  GBM.seurat <- SeuratDisk::LoadH5Seurat("data/GBM_seurat_object.h5seurat")
+  
+}
+
+
+
+```
+ 
+## Visualising dataset {.tabset}
+
+ 
+### Vis gene expression
+```{r vis_gene_expression}
+
+
+output.dir <- "results/figures/"
+
+if(!dir.exists(output.dir)){
+  dir.create(output.dir, recursive = T)
+}
+
+
+# Colour scheme taken from original publication
+AssignmentColors <- c(TCells = "#8DB032", BCells = "#F9BF31", 
+                      Other = "#E47B1E", Myeloid = "#CD4D53", 
+                      Endo = "#DC73B0", Oligo = "#966CBF",
+                      Pericytes = "#2960A1", Glioma = "#003F5C")
+
+# Plot UMAP projection
+UMAPPlot(object = GBM.seurat,
+         group.by = "Assignment",
+         cols = AssignmentColors,
+         raster = TRUE,
+         label = TRUE, 
+         label.size = 6) + NoLegend()
+
+dev.copy(pdf, paste0(output.dir, "UMAP_Assignments_raster.pdf"))
+dev.off()
+
+
+# Plot UMAP projection
+UMAPPlot(object = GBM.seurat,
+         group.by = "Assignment",
+         cols = AssignmentColors,
+         raster = FALSE,
+         label = TRUE, 
+         label.size = 6) + NoLegend()
+
+dev.copy(pdf, paste0(output.dir, "UMAP_Assignments.pdf"))
+dev.off()
+
+
+
+# colour scheme for plots 
+library(RColorBrewer)
+
+#RColorBrewer::display.brewer.all()
+
+cols.var <- RColorBrewer::brewer.pal(9, "OrRd")
+
+
+# genes of ineterest
+goi <- c("MKI67", "ACTA2", "CD68", "GFAP", "CXCL12", "VEGFA", "VEGFB", "VEGFD", "VEGFC", "HIF1A", "HIF3A")
+
+for(i in 1:length(goi)){
+  
+  print(
+    scCustomize::Plot_Density_Custom(GBM.seurat, 
+                                     features = goi[i],
+                                     custom_palette = cols.var,
+                                     joint = FALSE, 
+                                     pt.size = 1, 
+                                     reduction = "umap"))
+  
+  dev.copy(pdf, paste0(output.dir, "DensityPlot_RNA_", goi[i], ".pdf"))
+  dev.off()
+  
+  print(
+    scCustomize::FeaturePlot_scCustom(GBM.seurat, 
+                                      features = goi[i],
+                                      na_color = "lightgray",
+                                      colors_use = cols.var)
+  )
+  
+  dev.copy(pdf, paste0(output.dir, "ExpressionPlot_RNA_", goi[i], ".pdf"))
+  dev.off()
+}
+
+
+grep("HIF", rownames(GBM.seurat), value = T)
+
+goi <- "CXCL12"
+
+
+cols.var <- RColorBrewer::brewer.pal(9, "OrRd")
+
+cols.var <- c("gray90", cols.var)
+
+
+cols.var <- colorRampPalette(cols.var)(100)
+
+scCustomize::Plot_Density_Custom(GBM.seurat, 
+                                 features = goi,
+                                 custom_palette = cols.var,
+                                 joint = FALSE, 
+                                 pt.size = 1, 
+                                 reduction = "umap")
+
+dev.copy(pdf, paste0(output.dir, "DensityPlot_RNA_CXCL12_gray_base.pdf"))
+dev.off()
+
+```
+
+
+### Quantify expression
+```{r quantify_CXCL12}
+
+Idents(GBM.seurat) <- GBM.seurat@meta.data$Assignment
+
+
+
+VlnPlot(GBM.seurat,
+        features = "CXCL12",
+        pt.size = 0) + NoLegend()
+
+
+
+# get expression
+
+CXCL12.vals <- GBM.seurat@assays$RNA@data["CXCL12", ]
+summary(CXCL12.vals)
+CXCL12.meta <- CXCL12.vals >= 1
+
+GBM.seurat <- SeuratObject::AddMetaData(GBM.seurat, 
+                                        metadata = CXCL12.meta, 
+                                        col.name = "CXCL12_status")
+
+
+cell.number <- table(GBM.seurat@meta.data$Assignment)
+
+
+expression.var <- table(GBM.seurat@meta.data$Assignment, GBM.seurat@meta.data$CXCL12_status)
+
+percent.val <- sweep(expression.var, 1, cell.number, FUN = "/")
+percent.val <- percent.val * 100
+
+percent.val <- as.data.frame(percent.val)
+
+
+
+library(ggplot2)
+
+
+percent.val <- percent.val %>%
+  dplyr::filter(Var2 == TRUE) %>%
+  dplyr::arrange(desc(Freq))
+
+# lock in order
+percent.val$Var1 <- factor(percent.val$Var1, levels = percent.val$Var1)
+
+ggplot(percent.val) +
+ aes(x = Var1, y = Freq, fill = Var2) +
+ geom_col() +
+ scale_fill_hue(direction = 1) +
+ theme_minimal() + theme(axis.ticks = element_line(colour = "black"),
+    panel.grid.major = element_line(colour = NA),
+    panel.grid.minor = element_line(colour = NA),
+    axis.text = element_text(size = 12, colour = "black"),
+    axis.text.x = element_text(size = 12,
+        colour = "black"), axis.text.y = element_text(size = 12,
+        colour = "black"), panel.background = element_rect(fill = NA),
+    plot.background = element_rect(colour = NA),
+    legend.position = "none") +labs(title = "Freq of CXCL12 positive cells within cluster",
+    x = NULL, fill = NULL)
+
+
+  dev.copy(pdf, paste0(output.dir, "Frequency_of_CXCL12_positive_cells_within_each_cluster.pdf"))
+  dev.off()
+
+
+
+```
+
