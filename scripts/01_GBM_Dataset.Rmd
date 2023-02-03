@@ -72,6 +72,15 @@ library("usefulfunctions")
 quick.load <- FALSE
 long.compute <- FALSE
 
+
+output.dir <- "results/figures/"
+
+if(!dir.exists(output.dir)){
+  dir.create(output.dir, recursive = T)
+}
+
+
+
 # Colour scheme 
 usefulfunctions::Get.batlow()
 
@@ -309,8 +318,16 @@ GBM.seurat <- SeuratObject::AddMetaData(GBM.seurat,
 
 cell.number <- table(GBM.seurat@meta.data$Assignment)
 
+# export table
+write.csv(cell.number, paste0(output.dir, "Number_of_cells_sequenced.csv"))
 
 expression.var <- table(GBM.seurat@meta.data$Assignment, GBM.seurat@meta.data$CXCL12_status)
+
+colnames(expression.var) <- c("CXCL12_Negative", "CXCL12_Positive")
+
+# export table
+write.csv(expression.var, paste0(output.dir, "Number_of_cells_positive_or_negative_CXCL12.csv"))
+
 
 percent.val <- sweep(expression.var, 1, cell.number, FUN = "/")
 percent.val <- percent.val * 100
@@ -323,7 +340,7 @@ library(ggplot2)
 
 
 percent.val <- percent.val %>%
-  dplyr::filter(Var2 == TRUE) %>%
+  dplyr::filter(Var2 == "CXCL12_Positive") %>%
   dplyr::arrange(desc(Freq))
 
 # lock in order
