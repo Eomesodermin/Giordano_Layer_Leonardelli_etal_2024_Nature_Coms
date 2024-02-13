@@ -93,39 +93,39 @@ usefulfunctions::Get.batlow()
 
 
 if(long.compute){
-#raw.data <- Seurat::Read10X(data.dir = "data/SCP1985/expression/Raw_data/")
-
-
-input.meta <- read.delim("data/SCP1985/metadata/Meta_GBM.txt", sep = ",")
-
-input.meta <- input.meta[-1, ]
-
-rownames(input.meta) <- input.meta$NAME
-
-
-# load processed data
-processed.data <- Seurat::Read10X(data.dir = "data/SCP1985/expression/Processed_data/")
-
-processed.seurat <- CreateAssayObject(data = processed.data)
-
-GBM.seurat <- CreateSeuratObject(counts = processed.seurat,
-                                 min.cells = 0,
-                                 min.features = 0,
-                                 is.expr = 0, 
-                                 normalization.method = NULL, 
-                                 do.scale = FALSE, 
-                                 do.center = FALSE, 
-                                 names.field = 1, 
-                                 names.delim = "_", 
-                                 meta.data = input.meta)
-
-
-
-GBM.seurat@meta.data[1:10, ]
-
-
-# remove large objects
-rm(input.meta, processed.data, processed.seurat)
+  #raw.data <- Seurat::Read10X(data.dir = "data/SCP1985/expression/Raw_data/")
+  
+  
+  input.meta <- read.delim("data/SCP1985/metadata/Meta_GBM.txt", sep = ",")
+  
+  input.meta <- input.meta[-1, ]
+  
+  rownames(input.meta) <- input.meta$NAME
+  
+  
+  # load processed data
+  processed.data <- Seurat::Read10X(data.dir = "data/SCP1985/expression/Processed_data/")
+  
+  processed.seurat <- CreateAssayObject(data = processed.data)
+  
+  GBM.seurat <- CreateSeuratObject(counts = processed.seurat,
+                                   min.cells = 0,
+                                   min.features = 0,
+                                   is.expr = 0, 
+                                   normalization.method = NULL, 
+                                   do.scale = FALSE, 
+                                   do.center = FALSE, 
+                                   names.field = 1, 
+                                   names.delim = "_", 
+                                   meta.data = input.meta)
+  
+  
+  
+  GBM.seurat@meta.data[1:10, ]
+  
+  
+  # remove large objects
+  rm(input.meta, processed.data, processed.seurat)
 }
 ```
 
@@ -134,48 +134,48 @@ rm(input.meta, processed.data, processed.seurat)
 ```{r adding_umap_metadata}
 
 if(long.compute){
-
-# Set seed for reproducibility
-set.seed(42)
-
-DefaultAssay(GBM.seurat) <- "RNA"
-
-
-GBM.seurat@meta.data[1:10,]
-
-colnames(GBM.seurat@meta.data)
-
-
-input.umap <- read.delim("data/SCP1985/cluster/Cluster_GBM.txt", sep = ",")
-
-input.umap <- input.umap[-1,]
-
-rownames(input.umap)
-colnames(input.umap)
-input.umap <- input.umap[,2:3]
-input.umap$X <- as.numeric(input.umap$X)
-input.umap$Y <- as.numeric(input.umap$Y)
-colnames(input.umap)
-colnames(input.umap) <- c("UMAP_1", "UMAP_2")
-input.umap <- as.matrix(input.umap)
-
-
-
-DefaultAssay(GBM.seurat) <- "RNA"
-
-GBM.seurat[["umap"]] <- CreateDimReducObject(embeddings = input.umap,
-                                             key = "umap_",
-                                             assay = DefaultAssay(GBM.seurat))
-
-
-Idents(GBM.seurat) <- GBM.seurat@meta.data$Assignment
-
-
-
-SeuratDisk::SaveH5Seurat(GBM.seurat, 
-                         filename = "data/GBM_seurat_object.h5seurat", 
-                         overwrite = TRUE, 
-                         verbose = TRUE)
+  
+  # Set seed for reproducibility
+  set.seed(42)
+  
+  DefaultAssay(GBM.seurat) <- "RNA"
+  
+  
+  GBM.seurat@meta.data[1:10,]
+  
+  colnames(GBM.seurat@meta.data)
+  
+  
+  input.umap <- read.delim("data/SCP1985/cluster/Cluster_GBM.txt", sep = ",")
+  
+  input.umap <- input.umap[-1,]
+  
+  rownames(input.umap)
+  colnames(input.umap)
+  input.umap <- input.umap[,2:3]
+  input.umap$X <- as.numeric(input.umap$X)
+  input.umap$Y <- as.numeric(input.umap$Y)
+  colnames(input.umap)
+  colnames(input.umap) <- c("UMAP_1", "UMAP_2")
+  input.umap <- as.matrix(input.umap)
+  
+  
+  
+  DefaultAssay(GBM.seurat) <- "RNA"
+  
+  GBM.seurat[["umap"]] <- CreateDimReducObject(embeddings = input.umap,
+                                               key = "umap_",
+                                               assay = DefaultAssay(GBM.seurat))
+  
+  
+  Idents(GBM.seurat) <- GBM.seurat@meta.data$Assignment
+  
+  
+  
+  SeuratDisk::SaveH5Seurat(GBM.seurat, 
+                           filename = "data/GBM_seurat_object.h5seurat", 
+                           overwrite = TRUE, 
+                           verbose = TRUE)
 }else{
   
   GBM.seurat <- SeuratDisk::LoadH5Seurat("data/GBM_seurat_object.h5seurat")
@@ -185,10 +185,10 @@ SeuratDisk::SaveH5Seurat(GBM.seurat,
 
 
 ```
- 
+
 ## Visualising dataset {.tabset}
 
- 
+
 ### Vis gene expression
 ```{r vis_gene_expression}
 
@@ -218,19 +218,6 @@ dev.copy(pdf, paste0(output.dir, "UMAP_Assignments_raster.pdf"))
 dev.off()
 
 
-# Plot UMAP projection
-UMAPPlot(object = GBM.seurat,
-         group.by = "Assignment",
-         cols = AssignmentColors,
-         raster = FALSE,
-         label = TRUE, 
-         label.size = 6) + NoLegend()
-
-dev.copy(pdf, paste0(output.dir, "UMAP_Assignments.pdf"))
-dev.off()
-
-
-
 # colour scheme for plots 
 library(RColorBrewer)
 
@@ -238,56 +225,16 @@ library(RColorBrewer)
 
 cols.var <- RColorBrewer::brewer.pal(9, "OrRd")
 
+scCustomize::FeaturePlot_scCustom(GBM.seurat, 
+                                  features = "CXCL12",
+                                  order = TRUE,
+                                  raster = FALSE,
+                                  colors_use = cols.var,
+                                  na_color = "lightgray")
 
-# genes of ineterest
-goi <- c("MKI67", "ACTA2", "CD68", "GFAP", "CXCL12", "VEGFA", "VEGFB", "VEGFD", "VEGFC", "HIF1A", "HIF3A")
-
-for(i in 1:length(goi)){
-  
-  print(
-    scCustomize::Plot_Density_Custom(GBM.seurat, 
-                                     features = goi[i],
-                                     custom_palette = cols.var,
-                                     joint = FALSE, 
-                                     pt.size = 1, 
-                                     reduction = "umap"))
-  
-  dev.copy(pdf, paste0(output.dir, "DensityPlot_RNA_", goi[i], ".pdf"))
-  dev.off()
-  
-  print(
-    scCustomize::FeaturePlot_scCustom(GBM.seurat, 
-                                      features = goi[i],
-                                      na_color = "lightgray",
-                                      colors_use = cols.var)
-  )
-  
-  dev.copy(pdf, paste0(output.dir, "ExpressionPlot_RNA_", goi[i], ".pdf"))
-  dev.off()
-}
-
-
-grep("HIF", rownames(GBM.seurat), value = T)
-
-goi <- "CXCL12"
-
-
-cols.var <- RColorBrewer::brewer.pal(9, "OrRd")
-
-cols.var <- c("gray90", cols.var)
-
-
-cols.var <- colorRampPalette(cols.var)(100)
-
-scCustomize::Plot_Density_Custom(GBM.seurat, 
-                                 features = goi,
-                                 custom_palette = cols.var,
-                                 joint = FALSE, 
-                                 pt.size = 1, 
-                                 reduction = "umap")
-
-dev.copy(pdf, paste0(output.dir, "DensityPlot_RNA_CXCL12_gray_base.pdf"))
+dev.copy(pdf, paste0(output.dir, "Figure_3A.pdf"))
 dev.off()
+
 
 ```
 
@@ -319,14 +266,14 @@ GBM.seurat <- SeuratObject::AddMetaData(GBM.seurat,
 cell.number <- table(GBM.seurat@meta.data$Assignment)
 
 # export table
-write.csv(cell.number, paste0(output.dir, "Number_of_cells_sequenced.csv"))
+#write.csv(cell.number, paste0(output.dir, "Number_of_cells_sequenced.csv"))
 
 expression.var <- table(GBM.seurat@meta.data$Assignment, GBM.seurat@meta.data$CXCL12_status)
 
 colnames(expression.var) <- c("CXCL12_Negative", "CXCL12_Positive")
 
 # export table
-write.csv(expression.var, paste0(output.dir, "Number_of_cells_positive_or_negative_CXCL12.csv"))
+#write.csv(expression.var, paste0(output.dir, "Number_of_cells_positive_or_negative_CXCL12.csv"))
 
 
 percent.val <- sweep(expression.var, 1, cell.number, FUN = "/")
@@ -334,6 +281,8 @@ percent.val <- percent.val * 100
 
 percent.val <- as.data.frame(percent.val)
 
+# export table
+write.csv(percent.val, paste0(output.dir, "Supplementary_Figure_3_Frequency_of_cells_positive_or_negative_for_CXCL12_within_celltype_clusters.csv"))
 
 
 library(ggplot2)
@@ -347,172 +296,25 @@ percent.val <- percent.val %>%
 percent.val$Var1 <- factor(percent.val$Var1, levels = percent.val$Var1)
 
 ggplot(percent.val) +
- aes(x = Var1, y = Freq, fill = Var2) +
- geom_col() +
- scale_fill_hue(direction = 1) +
- theme_minimal() + theme(axis.ticks = element_line(colour = "black"),
-    panel.grid.major = element_line(colour = NA),
-    panel.grid.minor = element_line(colour = NA),
-    axis.text = element_text(size = 12, colour = "black"),
-    axis.text.x = element_text(size = 12,
-        colour = "black"), axis.text.y = element_text(size = 12,
-        colour = "black"), panel.background = element_rect(fill = NA),
-    plot.background = element_rect(colour = NA),
-    legend.position = "none") +labs(title = "Freq of CXCL12 positive cells within cluster",
-    x = NULL, fill = NULL)
+  aes(x = Var1, y = Freq, fill = Var2) +
+  geom_col() +
+  scale_fill_hue(direction = 1) +
+  theme_minimal() + theme(axis.ticks = element_line(colour = "black"),
+                          panel.grid.major = element_line(colour = NA),
+                          panel.grid.minor = element_line(colour = NA),
+                          axis.text = element_text(size = 12, colour = "black"),
+                          axis.text.x = element_text(size = 12,
+                                                     colour = "black"), axis.text.y = element_text(size = 12,
+                                                                                                   colour = "black"), panel.background = element_rect(fill = NA),
+                          plot.background = element_rect(colour = NA),
+                          legend.position = "none") +labs(title = "Freq of CXCL12 positive cells within cluster",
+                                                          x = NULL, fill = NULL)
 
 
-  dev.copy(pdf, paste0(output.dir, "Frequency_of_CXCL12_positive_cells_within_each_cluster.pdf"))
-  dev.off()
-
-
+dev.copy(pdf, paste0(output.dir, "Supplementary_Figure_3_Frequency_of_CXCL12_positive_cells_within_each_cluster.pdf"))
+dev.off()
 
 ```
 
-
-
-### correlation analysis 
-```{r correlation_analysis}
-
-# Pericytes
-# Endo
-# Myeloid 
-# glioma 
-
-
-
-# subset data for population of interest 
-Idents(GBM.seurat) <- GBM.seurat@meta.data$Assignment
-
-temp.seurat <- subset(GBM.seurat, idents = "Endo")
-
-
-
-correlation.data <- usefulfunctions::sc.correlation(data.slot = as.matrix(temp.seurat@assays$RNA@data), 
-                                                    goi = "CXCL12")
-
-
-
-correlation.data %>%
-  dplyr::filter(FDR < 0.05) %>%
-  dplyr::top_n(10, Cor.val) %>%
-  dplyr::arrange(desc(Cor.val))
-
-temp.seurat <- ScaleData(temp.seurat)
-
-usefulfunctions::correlation.heatmaps(temp.seurat, correlation.df = correlation.data, goi = "CXCL12")
-
-colnames(correlation.data)[1] <- "gene"
-
-# filter for up-regulated 
-up.cor.data <- correlation.data %>%
-  dplyr::filter(Cor.val > 0) %>%
-  dplyr::filter(FDR < 0.05) %>%
-  dplyr::arrange(desc(Cor.val))
-
-
-usefulfunctions::GO.function(markers = up.cor.data, topn = 500, ont = "MF")
-
-
-colnames(correlation.data)[1] <- "GeneID"
-
-
-plot.cor.data(cor.df = correlation.data, goi = "CXCL12")
-
-
-
-
-
-plot.cor.data <- function(cor.df,
-                          output.dir = "output/figures/",
-                          goi = "NKG7",
-                          top.n.val = 30){
-
-  
-  #browser()
-  # Create output directory
-  if(!dir.exists(paste0(output.dir))){
-    dir.create(paste0(output.dir),
-               recursive = T)
-  }
-
-
-
-  # set up dataset and variables
-
-  # order datset
-  ordered.cor <- cor.df %>%
-    dplyr::arrange(plyr::desc(.data$Cor.val))
-
-  y.val <- nrow(ordered.cor)
-
-  ordered.cor$Ypos <- c(y.val:1)
-
-  # subset data for top X value
-  top.corr <- ordered.cor[1:top.n.val, ]
-
-
-  pdf(paste0(output.dir, "correlation.pdf"), width = 5, height= 9)
-
-  # Plot overview of correlation analysis
-  graphics::plot(ordered.cor$Cor.val,
-             ordered.cor$Ypos,
-             type = "l")
-
-  # Highlight goi
-  for(i in seq_along(goi)){
-    goi.logic <- ordered.cor$GeneID == goi[i]
-    goi.xpos <- ordered.cor$Cor.val[goi.logic]
-    goi.ypos <- ordered.cor$Ypos[goi.logic]
-
-    graphics::points(goi.xpos,
-           goi.ypos)
-
-    graphics::text(goi.xpos,
-         goi.ypos,
-         labels = goi[i],
-         pos = 1)
-
-  }
-
-
-  # create line highlighting top n cor vals
-  graphics::lines(top.corr$Cor.val,
-        max(top.corr$Ypos):min(top.corr$Ypos),
-        lwd = 2,
-        col = "blue")
-
-  dev.off()
-
-
-  # Plot an inset of the top X
-
-  # Plot top x
-  pdf(paste0(output.dir, "correlation_top_", top.n.val, ".pdf"), width = 3, height= 6)
-
-  graphics::plot(top.corr$Cor.val,
-       max(top.corr$Ypos):min(top.corr$Ypos),
-       type = "l",
-       xlim = c(0.1,1),
-       col = "blue",
-       lwd = 2)
-
-  graphics::points(top.corr$Cor.val,
-         max(top.corr$Ypos):min(top.corr$Ypos),
-         pch = 20)
-
-
-  graphics::text(top.corr$Cor.val,
-       max(top.corr$Ypos):min(top.corr$Ypos),
-       top.corr$GeneID,
-       pos = 4)
-
-  dev.off()
-
-
-}
-
-
-```
 
 
