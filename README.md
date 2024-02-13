@@ -10,4 +10,4 @@ see [GBMatlas](https://github.com/parveendabas/GBMatlas) github repo for more in
 
 ## Purpose
 
-Re-analysis of published data to explore CXCL12 expression in endothelial cells within GBM. Results to be used in publication by Hoelzel lab, project headed by Sonia Leonardelli
+Re-analysis of published data to explore CXCL12 expression in endothelial cells within GBM.
