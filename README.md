@@ -8,18 +8,18 @@
 
 **Frank A. Giordano**<sup>1,2,13</sup>, **Julian P. Layer**<sup>3,4,13</sup>, **Sonia Leonardelli**<sup>4,13</sup>, **Lea L. Friker**<sup>4,5</sup>, **Roberta Turiello**<sup>4</sup>,  **Dillon Corvino**<sup>4</sup>, **Thomas Zeyen**<sup>6</sup>, **Christina Schaub**<sup>6</sup>, **Wolf Müller**<sup>7</sup>, **Elena Sperk**<sup>1</sup>, **Leonard Christopher Schmeel**<sup>3</sup>, **Katharina Sahm**<sup>2,8,9</sup>, **Christoph Oster**<sup>10</sup>, **Sied Kebir**<sup>10</sup>, **Peter Hambsch**<sup>11</sup>, **Torsten Pietsch**<sup>5</sup>, **Sotirios Bisdas**<sup>12</sup>, **Michael Platten**<sup>2,8,9</sup>, **Martin Glas**<sup>10</sup>, **Clemens Seidel**<sup>11</sup>, **Ulrich Herrlinger**<sup>6,13</sup>, **Michael Hölzel**<sup>4,13</sup>
  
-¹ Department of Radiation Oncology, University Medical Center Mannheim, Medical Faculty Mannheim, University of Heidelberg, Mannheim, Germany  
-² DKFZ Hector Cancer Institute at the University Medical Center Mannheim, Mannheim, Germany  
-³ Department of Radiation Oncology, University Hospital Bonn, University of Bonn, Bonn, Germany  
-⁴ Institute of Experimental Oncology, Medical Faculty, University Hospital Bonn, University of Bonn, Bonn, Germany  
-⁵ Institute of Neuropathology, University Hospital Bonn, University of Bonn, Bonn, Germany  
-⁶ Department of Neurooncology, Center for Neurology, University Hospital Bonn, Bonn, Germany  
-⁷ Institute of Neuropathology, University Hospital Leipzig, University of Leipzig, Leipzig, Germany  
-⁸ Department of Neurology, Medical Faculty Mannheim, MCTN, Heidelberg University, Mannheim, Germany  
-⁹ DKTK Clinical Cooperation Unit Neuroimmunology and Brain Tumor Immunology, German Cancer Research Center, Heidelberg, Germany  
-¹⁰ Division of Clinical Neurooncology, Department of Neurology, Center for Translational Neuro- and Behavioral Sciences (C-TNBS) and West German Cancer Center, German Cancer Consortium, Partner Site Essen, University Hospital Essen, University Duisburg-Essen, Essen, Germany  
-¹¹ Department of Radiation Oncology, University Hospital Leipzig, University of Leipzig, Leipzig, Germany  
-¹² Lysholm Department of Neuroradiology, University College London, London, UK  
+<sup>1</sup> Department of Radiation Oncology, University Medical Center Mannheim, Medical Faculty Mannheim, University of Heidelberg, Mannheim, Germany  
+<sup>2</sup> DKFZ Hector Cancer Institute at the University Medical Center Mannheim, Mannheim, Germany  
+<sup>3</sup> Department of Radiation Oncology, University Hospital Bonn, University of Bonn, Bonn, Germany  
+<sup>4</sup> Institute of Experimental Oncology, Medical Faculty, University Hospital Bonn, University of Bonn, Bonn, Germany  
+<sup>5</sup> Institute of Neuropathology, University Hospital Bonn, University of Bonn, Bonn, Germany  
+<sup>6</sup> Department of Neurooncology, Center for Neurology, University Hospital Bonn, Bonn, Germany  
+<sup>7</sup> Institute of Neuropathology, University Hospital Leipzig, University of Leipzig, Leipzig, Germany  
+<sup>8</sup> Department of Neurology, Medical Faculty Mannheim, MCTN, Heidelberg University, Mannheim, Germany  
+<sup>9</sup> DKTK Clinical Cooperation Unit Neuroimmunology and Brain Tumor Immunology, German Cancer Research Center, Heidelberg, Germany  
+<sup>10</sup> Division of Clinical Neurooncology, Department of Neurology, Center for Translational Neuro- and Behavioral Sciences (C-TNBS) and West German Cancer Center, German Cancer Consortium, Partner Site Essen, University Hospital Essen, University Duisburg-Essen, Essen, Germany  
+<sup>11</sup> Department of Radiation Oncology, University Hospital Leipzig, University of Leipzig, Leipzig, Germany  
+<sup>12</sup> Lysholm Department of Neuroradiology, University College London, London, UK  
 
 <sup>13</sup> Authors contributed equally: **Frank A. Giordano, Julian P. Layer, Sonia Leonardelli, Ulrich Herrlinger, Michael Hölzel**  
 
