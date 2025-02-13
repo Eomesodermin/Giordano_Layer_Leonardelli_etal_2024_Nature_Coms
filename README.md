@@ -19,7 +19,7 @@
 ¹¹ Department of Radiation Oncology, University Hospital Leipzig, University of Leipzig, Leipzig, Germany  
 ¹² Lysholm Department of Neuroradiology, University College London, London, UK  
 
-\13 Authors contributed equally: **Frank A. Giordano, Julian P. Layer, Sonia Leonardelli, Ulrich Herrlinger, Michael Hölzel**  
+<sup>13</sup> Authors contributed equally: **Frank A. Giordano, Julian P. Layer, Sonia Leonardelli, Ulrich Herrlinger, Michael Hölzel**  
 
 ## Contact Information  
 
