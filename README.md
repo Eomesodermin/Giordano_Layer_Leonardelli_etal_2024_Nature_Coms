@@ -4,8 +4,8 @@
 
 ## Authors & Affiliations
 
-**Frank A. Giordano**¹ ² ¹³, **Sonia Leonardelli**³ ⁴ ¹³, **Lea L. Friker**, **Julian P. Layer**, **Dillon Corvino**⁴, **Thomas Zeyen**⁶, **Christina Schaub**⁶, **Wolf Müller**⁷, **Elena Sperk**⁴⁵, **Roberta Turiello**⁴¹, **Leonard Christopher Schmeel**, **Katharina Sahm**²⁸⁹, **Christoph Oster**, **Michael Platten**¹⁰, **Sied Kebir**¹⁰, **Peter Hambsch**¹¹, **Torsten Pietsch**⁵, **Sotirios Bisdas**²⁸⁹, **Martin Glas**¹⁰, **Clemens Seidel**¹¹, **Ulrich Herrlinger**⁶¹³, **Michael Hölzel**⁴¹³  
-
+**Frank A. Giordano**<sup>1,2,13</sup>, **Julian P. Layer**<sup>3,4,13</sup>, **Sonia Leonardelli**<sup>4,13</sup>, **Lea L. Friker**<sup>4,5</sup>, **Roberta Turiello**<sup>4</sup>,  **Dillon Corvino**<sup>4</sup>, **Thomas Zeyen**<sup>6</sup>, **Christina Schaub**<sup>6</sup>, **Wolf Müller**<sup>7</sup>, **Elena Sperk**<sup>1</sup>, **Leonard Christopher Schmeel**<sup>3</sup>, **Katharina Sahm**<sup>2,8,9</sup>, **Christoph Oster**<sup>10</sup>, **Sied Kebir**<sup>10</sup>, **Peter Hambsch**<sup>11</sup>, **Torsten Pietsch**<sup>5</sup>, **Sotirios Bisdas**<sup>12</sup>, **Michael Platten**<sup>2,8,9</sup>, **Martin Glas**<sup>10</sup>, **Clemens Seidel**<sup>11</sup>, **Ulrich Herrlinger**<sup>6,13</sup>, **Michael Hölzel**<sup>4,13</sup>
+ 
 ¹ Department of Radiation Oncology, University Medical Center Mannheim, Medical Faculty Mannheim, University of Heidelberg, Mannheim, Germany  
 ² DKFZ Hector Cancer Institute at the University Medical Center Mannheim, Mannheim, Germany  
 ³ Department of Radiation Oncology, University Hospital Bonn, University of Bonn, Bonn, Germany  
@@ -19,7 +19,7 @@
 ¹¹ Department of Radiation Oncology, University Hospital Leipzig, University of Leipzig, Leipzig, Germany  
 ¹² Lysholm Department of Neuroradiology, University College London, London, UK  
 
-\* Authors contributed equally: **Frank A. Giordano, Julian P. Layer, Sonia Leonardelli, Ulrich Herrlinger, Michael Hölzel**  
+\13 Authors contributed equally: **Frank A. Giordano, Julian P. Layer, Sonia Leonardelli, Ulrich Herrlinger, Michael Hölzel**  
 
 ## Contact Information  
 
@@ -41,28 +41,15 @@ Our data imply the safety of NOX-A12, and its efficacy signal warrants further i
 
 ---
 
+## Dataset Info 
+
+As part of this study, we reanalyzed **Single-cell analysis of human glioma and immune cells identifies S100A4 as an immunotherapy target**, Abdelfattah, et al., 2022, *Nature Communications* (GSE182109).  
+
+- Data was downloaded from the **Single Cell Portal** (Broad Institute).  
+- For further details on the original dataset and associated code, refer to the **[GBMatlas GitHub repository](https://github.com/parveendabas/GBMatlas)**.  
+
+---
+
 ## Code Attribution  
 
 This code and analysis were authored by **Dillon Corvino**.  
-
-
-
-
-
-
-
-
-
-# Analysis of published GBM dataset
-
-## Data:
-
-Single-cell analysis of human glioma and immune cells identifies S100A4 as an immunotherapy target, Abdelfattah, et al., 2022, Nature Communications. (GSE182109)
-
-Downloaded from Single cell portal (Broad institute)
-
-see [GBMatlas](https://github.com/parveendabas/GBMatlas) github repo for more info on dataset and code associated with original publication
-
-## Purpose
-
-Re-analysis of published data to explore CXCL12 expression in endothelial cells within GBM.
