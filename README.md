@@ -49,6 +49,7 @@ As part of this study, we reanalyzed **Single-cell analysis of human glioma and 
 
 - Data was downloaded from the **Single Cell Portal** (Broad Institute).  
 - For further details on the original dataset and associated code, refer to the **[GBMatlas GitHub repository](https://github.com/parveendabas/GBMatlas)**.  
+- The reprocessed Seurat object (`GBM_seurat_object.h5seurat`) is **not stored in this repository** — it is derived from the public Abdelfattah et al. (GSE182109) data and can be regenerated from that source using the scripts here.  
 
 ---
 

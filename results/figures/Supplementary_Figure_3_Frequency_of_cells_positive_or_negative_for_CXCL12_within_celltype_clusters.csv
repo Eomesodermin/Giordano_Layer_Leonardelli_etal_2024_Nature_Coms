@@ -1,0 +1,17 @@
+"","Var1","Var2","Freq"
+"1","BCells","CXCL12_Negative",100
+"2","Endo","CXCL12_Negative",75.652841781874
+"3","Glioma","CXCL12_Negative",99.7150335110807
+"4","Myeloid","CXCL12_Negative",96.3025265518834
+"5","Oligo","CXCL12_Negative",99.9135695764909
+"6","Other","CXCL12_Negative",100
+"7","Pericytes","CXCL12_Negative",85.8647936786655
+"8","TCells","CXCL12_Negative",99.7649463464487
+"9","BCells","CXCL12_Positive",0
+"10","Endo","CXCL12_Positive",24.347158218126
+"11","Glioma","CXCL12_Positive",0.284966488919329
+"12","Myeloid","CXCL12_Positive",3.69747344811663
+"13","Oligo","CXCL12_Positive",0.0864304235090752
+"14","Other","CXCL12_Positive",0
+"15","Pericytes","CXCL12_Positive",14.1352063213345
+"16","TCells","CXCL12_Positive",0.235053653551354
