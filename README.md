@@ -2,7 +2,7 @@
 
 # L-RNA Aptamer-Based CXCL12 Inhibition Combined with Radiotherapy in Newly Diagnosed Glioblastoma: Dose Escalation of the Phase I/II GLORIA Trial
 
-### [Published in Clinical Cancer Research](https://doi.org/10.1038/s41467-024-48416-9) 
+### [Published in Nature Communications](https://doi.org/10.1038/s41467-024-48416-9) 
 
 ## Authors & Affiliations
 
@@ -54,4 +54,4 @@ As part of this study, we reanalyzed **Single-cell analysis of human glioma and 
 
 ## Code Attribution  
 
-This code and analysis were authored by **Dillon Corvino**.  
+This code and analysis were authored by **Dillon Corvino** — [github.com/Eomesodermin](https://github.com/Eomesodermin) · [dilloncorvino.com](https://dilloncorvino.com).  
