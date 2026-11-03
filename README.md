@@ -45,7 +45,7 @@ Our data imply the safety of NOX-A12, and its efficacy signal warrants further i
 
 ## Dataset Info 
 
-As part of this study, we reanalyzed **Single-cell analysis of human glioma and immune cells identifies S100A4 as an immunotherapy target**, Abdelfattah, et al., 2022, *Nature Communications* (GSE182109).  
+As part of this study, we reanalyzed **Single-cell analysis of human glioma and immune cells identifies S100A4 as an immunotherapy target**, Abdelfattah, et al., 2022, *Nature Communications* 13, 767 ([doi:10.1038/s41467-022-28372-y](https://doi.org/10.1038/s41467-022-28372-y); GEO [GSE182109](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182109)).  
 
 - Data was downloaded from the **Single Cell Portal** (Broad Institute).  
 - For further details on the original dataset and associated code, refer to the **[GBMatlas GitHub repository](https://github.com/parveendabas/GBMatlas)**.  
