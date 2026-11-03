@@ -53,6 +53,27 @@ As part of this study, we reanalyzed **Single-cell analysis of human glioma and 
 
 ---
 
+## Repository structure
+
+```
+scripts/01_GBM_Dataset.Rmd   # reanalysis of the public glioma single-cell atlas: CXCL12-positive cells across cell types and clusters
+results/figures/             # Fig 3A, Supplementary Fig 3 and the underlying cell-count tables
+```
+
+## Reproducing the analysis
+
+1. Download the glioma single-cell atlas from the Broad Single Cell Portal (see [Dataset Info](#dataset-info); accession GSE182109).
+2. Knit `scripts/01_GBM_Dataset.Rmd` from the repository root. The notebook sets its working directory with `here::here()` and loads its packages in the Setup chunk.
+
+The same public dataset is also reprocessed, with a general preprocessing workflow, in [`tumour-immune-scrnaseq-reanalyses`](https://github.com/Eomesodermin/tumour-immune-scrnaseq-reanalyses/tree/main/datasets/abdelfattah_2022).
+
+
+## Citation
+
+To cite the paper, use the DOI above; to cite this code, use the Zenodo DOI in the badge at the top. Machine-readable citation metadata is in [`CITATION.cff`](CITATION.cff).
+
+---
+
 ## Code Attribution  
 
 This code and analysis were authored by **Dillon Corvino** — [github.com/Eomesodermin](https://github.com/Eomesodermin) · [dilloncorvino.com](https://dilloncorvino.com).  
