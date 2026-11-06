@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/596931005.svg)](https://doi.org/10.5281/zenodo.14866008)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14866008.svg)](https://doi.org/10.5281/zenodo.14866008)
 
 # L-RNA Aptamer-Based CXCL12 Inhibition Combined with Radiotherapy in Newly Diagnosed Glioblastoma: Dose Escalation of the Phase I/II GLORIA Trial
 
